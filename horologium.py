@@ -22,34 +22,34 @@ print('''
 options = '''
 Things you can do:
 start > starts to record time
-log > log your time and reset the timer
+log > prints total time accrued
 quit > exit the program and log your progress
 options > show this list
 '''
 print(options)
 
-#
 # Prompt the user with a list of commands
 usr_input = input('What would you like to do? ')
 
 # Disseminate commands
 while usr_input:
 
-    if usr_input == 'quit':
-        '''Stop the timer if started, log the time, and exit'''
-        break
-
-    elif usr_input == 'start':
+    if usr_input == 'start':
         '''Begin the timer'''
         Timer.timer('start')
         break
 
     elif usr_input == 'log':
-        '''Log the elapsed time'''
-        print('Logging progress...')
-        # Timer.timer('log') // This is broken for the time being
+        '''Print the accrued time'''
+        Timer.timer('log')
         break
 
     elif usr_input == 'options':
         print(options)
         break
+
+    else:
+        '''For catching typos'''
+        print('Please enter one of the listed commands')
+        usr_input = input('\nWhat would you like to do?')
+        continue

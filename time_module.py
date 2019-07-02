@@ -4,27 +4,20 @@
 import time
 
 
-class Records:
-    '''Stores users and their logged time'''
-
-    def __init__(self):
-        '''Initialize dictionary of users'''
-
-        self.users = {}
-
-    def write_time(self, time):
-        '''Writing the recorded time to the give users dictionary'''
-
-
 class Timer:
     '''Class that holds the logic behind the time recordings'''
 
     def __init__(self):
-        '''Initialize time on timer'''
+        '''Initialize time on timer by reading it from file'''
+        file = 'record.py'
+        with open(file, 'r') as f_obj:
+            self.total_time = f_obj.read()
+
+        # Translating str to int
+        self.total_time = int(self.total_time)
 
     def timer(self, command):
         '''According to input, start or stop the timer'''
-        total_time = 0
 
         if command == 'start':
             # Prints the different between the start/stop as
@@ -33,14 +26,44 @@ class Timer:
             end = input('Type "stop" to stop the timer ')
 
             if end == 'stop':
+                # Finding the elapsed time through the difference
+                # of the start and stop times
                 stop = time.time()
-                elapsed = stop - start
+                elapsed = round(stop - start)
 
                 # Print the elapsed time
                 print('You have worked for, '
-                      + str(round(elapsed))
+                      + str(elapsed)
                       + ' seconds.')
 
+                # Add elapsed time to total time
+                self.total_time += elapsed
+
+                # Translating int back to str
+                self.total_time = str(self.total_time)
+
+                # Automatically writing the time elapsed to file
+                file = 'record.py'
+                with open(file, 'w') as f_obj:
+                    f_obj.write(self.total_time)
+
+            else:
+                print('Thats not how you spell stop dumbass')
+
         elif command == 'log':
-            '''Writing the total time to the dictionary'''
-            print('Logging time...')
+            '''Show total accrued time that is in the record'''
+
+            # Opening record
+            file = 'record.py'
+            with open(file, 'r') as f_obj:
+                accrued = f_obj.readlines()
+
+            # Printing custom statement
+            statement = print('\nYou have spent a total of, '
+                              + str(accrued)
+                              + ' secconds doing whatever you were doing!')
+            print(statement)
+
+        else:
+            # For if I break something
+            print('Whoops...')
