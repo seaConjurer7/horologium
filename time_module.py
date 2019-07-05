@@ -26,8 +26,6 @@ class Timer:
             end = input('Type "stop" to stop the timer ')
 
             if end == 'stop':
-                # Finding the elapsed time through the difference
-                # of the start and stop times
                 stop = time.time()
                 elapsed = round(stop - start)
 
@@ -35,8 +33,6 @@ class Timer:
                 print('You have worked for, '
                       + str(elapsed)
                       + ' seconds.')
-
-                # Add elapsed time to total time
                 self.total_time += elapsed
 
                 # Translating int back to str
@@ -58,7 +54,6 @@ class Timer:
             with open(file, 'r') as f_obj:
                 accrued = f_obj.readlines()
 
-            # Printing custom statement
             statement = print('\nYou have spent a total of, '
                               + str(accrued)
                               + ' secconds doing whatever you were doing!')
